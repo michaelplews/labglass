@@ -1,0 +1,44 @@
+%Round Bottome Flask
+\documentclass[preview]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\begin{document}
+	\begin{tikzpicture}
+		\pgfmathsetmacro{\R}{1}
+		%clockwise from 90
+		\coordinate (a) at ({90-atan((24/200)/\R)}:\R+40/100) [fill=none]{};
+		\coordinate (b) at ({90-atan((24/200)/\R)}:\R) [fill=none]{};
+		\coordinate (c) at ({45+atan((24/200)/\R)}:\R) {};
+		\coordinate (d) at ({45+atan((24/200)/\R)}:\R+40/100) {};
+		\coordinate (e) at ({45-atan((24/200)/\R)}:\R+40/100) {};
+		\coordinate (f) at ({45-atan((24/200)/\R)}:\R) {};
+		\coordinate (g) at ({135+atan((24/200)/\R)}:\R) {};
+		\coordinate (h) at ({135+atan((24/200)/\R)}:\R+40/100) {};
+		\coordinate (i) at ({135-atan((24/200)/\R)}:\R+40/100) {};
+		\coordinate (j) at ({135-atan((24/200)/\R)}:\R) {};
+		\coordinate (k) at ({90+atan((24/200)/\R)}:\R) {};
+		\coordinate (l) at ({90+atan((24/200)/\R)}:\R+40/100) {};
+
+		\draw (a) -- (b) arc ({90-atan((24/200)/\R)}:{45+atan((24/200)/\R)}:\R) -- (d);
+		\draw (e) -- (f) arc ({45-atan((24/200)/\R)}:{135+atan((24/200)/\R)-360}:\R) -- (h);
+		\draw (i) -- (j) arc ({135-atan((24/200)/\R)}:{90+atan((24/200)/\R)}:\R) -- (l);
+		%\draw[blue] (0,0) arc (30:60:1);		
+		%\draw[blue] (1,0) arc (0:{45-atan((24/200)/1)}:1);
+		%\draw[blue]	(1,0) arc ()
+		%\draw[red] (0,0) ++({135+atan((24/200)/1)}:1) arc ({135+atan((24/200)/1)}:{45-atan((24/200)/1)+360}:1);
+		%\draw[red] (0,0) ++({45+atan((24/200)/1)}:1) arc ({45+atan((24/200)/1)}:{90-atan((24/200)/1)}1);
+		%\draw (0,0) circle (1);
+		%\draw ({90-atan((24/200)/1)}:1) -- ({90-atan((24/200)/1)}:1+40/100);
+		%\draw ({90+atan((24/200)/1)}:1) -- ({90+atan((24/200)/1)}:1+40/100);
+		%24/40 x=24 y=40
+		%\coordinate (a) at (0cm, 1cm) {};
+		%\draw ({135-atan((24/200)/1)}:1) -- ({135-atan((24/200)/1)}:1+40/100);
+		%\draw ({135+atan((24/200)/1)}:1) -- ({135+atan((24/200)/1)}:1+40/100);
+
+		%\draw ({45-atan((24/200)/1)}:1) -- ({45-atan((24/200)/1)}:1+40/100);
+		%\draw ({45+atan((24/200)/1)}:1) -- ({45+atan((24/200)/1)}:1+40/100);
+		%\draw (a)++(24/200,40/100) -- ({(40/100)*tan(12.5)},0);
+		%\draw (a)++(-24/200,40/100) -- ({-(40/100)*tan(12.5)},0);
+	\end{tikzpicture}
+\end{document}
