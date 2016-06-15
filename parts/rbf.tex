@@ -1,5 +1,9 @@
 %Round Bottome Flask
+\documentclass[preview]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
 
+\begin{document}
 \begin{tikzpicture}
 	\pgfmathsetmacro{\R}{1}				%radius of flask
 	\pgfmathsetmacro{\neck}{3}			%number of necks
@@ -30,3 +34,4 @@
 	\draw (e) -- (f) arc ({\firstangle-atan((\taperwidth/200)/\R)}:{\secondangle+atan((\taperwidth/200)/\R)-360}:\R) -- (h);
 	\draw (i) -- (j) arc ({\secondangle-atan((\taperwidth/200)/\R)}:{\pos+atan((\taperwidth/200)/\R)}:\R) -- (l);
 \end{tikzpicture}
+\end{document}

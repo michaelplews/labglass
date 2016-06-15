@@ -1,5 +1,9 @@
 %Tapered Stopper
+\documentclass[preview]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
 
+\begin{document}
 \begin{tikzpicture}
 	\pgfmathsetmacro{\R}{1}				%radius of flask
 	\pgfmathsetmacro{\neck}{3}			%number of necks
@@ -20,3 +24,4 @@
 	\draw (a) -- (b) -- (c) -- (d) -- (a) -- (b);
 
 \end{tikzpicture}
+\end{document}
