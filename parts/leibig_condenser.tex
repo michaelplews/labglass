@@ -1,18 +1,16 @@
-%LeibigCondenser
 \documentclass[preview]{standalone}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 
 \begin{document}
 \begin{tikzpicture}
-	\pgfmathsetmacro{\R}{1}				%radius of flask
-	\pgfmathsetmacro{\width}{24}			%width of inner condenser
+	\pgfmathsetmacro{\R}{0.5}				%radius of flask
+	\pgfmathsetmacro{\width}{14}			%width of inner condenser
 	\pgfmathsetmacro{\length}{150}			%length of condenser
 	\pgfmathsetmacro{\pos}{90}
 	\pgfmathsetmacro{\ang}{45}			%separation of necks in degrees
-	\pgfmathsetmacro{\taperlength}{40}	%Length of the joint taper
+	\pgfmathsetmacro{\taperlength}{20}	%Length of the joint taper
 	\pgfmathsetmacro{\direction}{1}
-
 	%calculated
 	\pgfmathsetmacro{\firstangle}{\pos-\ang}	%Calculating the far right angle
 	\pgfmathsetmacro{\secondangle}{\pos+\ang}	%Calculating the far left angle
@@ -21,6 +19,7 @@
 	\pgfmathsetmacro{\waterwidth}{0.25*\width}
 	\pgfmathsetmacro{\taperwidth}{\width}	%Width of the joint taper
 	\pgfmathsetmacro{\taperlength}{\taperlength/100}
+	\pgfmathsetmacro{\R}{\R+\taperlength}	
 	
 	\coordinate (a) at (\direction*\width/2,\R+\length) {};
 	\coordinate (b) at (\direction*\width/2,\R) {};
@@ -42,9 +41,10 @@
 	\coordinate (j) at ({\pos-atan((\taperwidth/2)/\S)}:\S) {};
 	\coordinate (k) at ({\pos+atan((\taperwidth/2)/\S)}:\S) {};
 	\coordinate (l) at ({\pos+atan((\taperwidth/2)/\S)}:\S+\taperlength) {};
-	\draw (i) -- (j);
-
-
+	\draw (a) -- ($(i)+(0,\length)$) -- ($(j)+(0,\length)$);
+	\draw (d) -- ($(k)+(0,\length)$) -- ($(l)+(0,\length)$);
+	\draw (c) -- ($(l)+(0,-\taperlength)$) -- ($(k)+(0,-\taperlength)$);
+	\draw (b) -- ($(i)+(0,-\taperlength)$) -- ($(j)+(0,-\taperlength)$);
 
 \end{tikzpicture}
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.5.21)  14 JUN 2016 14:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.14)  24 JUN 2016 13:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -377,18 +377,18 @@ File: tikzlibrarycalc.code.tex 2013/07/15 v3.0.0 (rcs-revision 1.9)
 ) (./sample.aux)
 \openout1 = `sample.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
 
 Preview: Fontsize 10pt
 Preview: PDFoutput 1
@@ -448,15 +448,15 @@ e
 Preview: Tightpage 0 0 0 0
 [1] (./sample.aux) ) 
 Here is how much of TeX's memory you used:
- 12063 strings out of 493085
- 244161 string characters out of 6136917
- 272787 words of memory out of 5000000
- 15334 multiletter control sequences out of 15000+600000
+ 12123 strings out of 493085
+ 245351 string characters out of 6136917
+ 272788 words of memory out of 5000000
+ 15394 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,4n,56p,408b,513s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,4n,56p,408b,519s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on sample.pdf (1 page, 1238 bytes).
+Output written on sample.pdf (1 page, 1431 bytes).
 PDF statistics:
  11 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream
