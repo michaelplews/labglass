@@ -1,0 +1,34 @@
+\documentclass[border = 10pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{unitcircle}
+\begin{document}
+
+\begin{tikzpicture}
+%
+%  \path
+%              (0,0) pic (LL) {quadrant III}
+%        -- ++ (1,0) pic (LR) {quadrant IV}
+%        -- ++ (0,1) pic (UR) {quadrant I}
+%        -- cycle
+%        -- ++ (0,1) pic (UL) {quadrant II}
+%      ;
+%  \draw[blue] (LR-ne) -- (LR-sw);
+%
+% \draw[red] (LL-ne) rectangle (LL-sw);
+%
+%  \draw (LL-center) -- (UR-center)
+%                    -- (UL-center)
+%                    -- (LR-center);
+
+	%\draw[green] (0,0) pic (b) {_tapered_open};
+	%\draw[red] (0, 0) pic (c) {tapered_stopper};
+	\pic (A) {rbf={90, 135, 45}};
+	\pic[rotate=45-90] at (A-taper45-center) (x) {penny_stopper};
+	%\pic[rotate=90-90] at (A-taper90-center) (y) {tapered_stopper};
+	
+	%\node[green] at (x-center) (c) {.};
+	%\draw (At90) -- (At200);
+\end{tikzpicture}
+
+\end{document}

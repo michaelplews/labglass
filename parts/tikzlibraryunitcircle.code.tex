@@ -1,0 +1,108 @@
+\def\aeunitcircleradius{1cm}
+\def\taperangle{4}
+\def\R{0.75}				%radius of flask
+\def\neck{3}			%number of necks
+\def\pos{90}			%position of first neck in degrees
+\def\ang{45}			%separation of necks in degrees
+\def\taperwidth{24}	%Width of the joint taper
+\def\taperlength{40}	%Length of the joint taper
+\usetikzlibrary{calc}
+\tikzset{
+  quadrant I/.pic={%%
+    \draw[line width=1pt] (-\aeunitcircleradius/2,\aeunitcircleradius/2)  arc (90:0:\aeunitcircleradius);
+    \path (0,0)                  coordinate (-center)
+                -- ++ (0.5,-0.5) coordinate (-se)
+                -- ++ (0,1.0)    coordinate (-ne)
+                -- ++ (-1,0)     coordinate (-nw)
+                -- ++ (0,-1)     coordinate (-sw);
+    },
+  quadrant II/.pic={%%
+    \draw[line width=1pt] (-\aeunitcircleradius/2,-\aeunitcircleradius/2)  arc (180:90:\aeunitcircleradius);
+    \path (0,0)                  coordinate (-center)
+                -- ++ (0.5,-0.5) coordinate (-se)
+                -- ++ (0,1.0)    coordinate (-ne)
+                -- ++ (-1,0)     coordinate (-nw)
+                -- ++ (0,-1)     coordinate (-sw);
+    },
+  quadrant III/.pic={%%
+    \draw[line width=1pt] (-\aeunitcircleradius/2,\aeunitcircleradius/2)  arc (180:270:\aeunitcircleradius);
+    \path (0,0)                  coordinate (-center)
+                -- ++ (0.5,-0.5) coordinate (-se)
+                -- ++ (0,1.0)    coordinate (-ne)
+                -- ++ (-1,0)     coordinate (-nw)
+                -- ++ (0,-1)     coordinate (-sw);
+    },
+  quadrant IV/.pic={%%
+    \draw[line width=1pt] (-\aeunitcircleradius/2,-\aeunitcircleradius/2)  arc (-90:0:\aeunitcircleradius);
+    \path (0,0)                  coordinate (-center)
+                -- ++ (0.5,-0.5) coordinate (-se)
+                -- ++ (0,1.0)    coordinate (-ne)
+                -- ++ (-1,0)     coordinate (-nw)
+                -- ++ (0,-1)     coordinate (-sw);
+    },
+}
+\def\adjtaperlength{\taperlength/100}
+\def\adjtaperwidth{\taperwidth/100}
+\tikzset{%
+	pics/_tapered_open/.style={%%
+		code={%%%
+	\draw (0,0)
+		   ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength)
+		-- ++ ({270-\taperangle}:{\adjtaperlength/cos(\taperangle)})
+	       ++ (180:{\adjtaperwidth-(2*\adjtaperwidth*tan(\taperangle))})
+		-- ++ ({90+\taperangle}:{\adjtaperlength/cos(\taperangle)});
+	\path (0,0)					coordinate (-center)
+		-- ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength) coordinate (-ne)
+		-- ++ ({270-\taperangle}:{\adjtaperlength/cos(\taperangle)}) coordinate (se)
+		-- ++ (180:{\adjtaperwidth-(2*\adjtaperwidth*tan(\taperangle))}) coordinate (sw)
+		-- ++ ({90+\taperangle}:{\adjtaperlength/cos(\taperangle)}) coordinate (nw);
+		}%%%
+	},%%
+}%
+\tikzset{%
+	pics/tapered_stopper/.style={%%
+		code={%%%
+	\draw (0, 0)
+		   ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength)
+		-- ++ ({270-\taperangle}:{\adjtaperlength/cos(\taperangle)})
+		-- ++ (180:{\adjtaperwidth-(2*\adjtaperwidth*tan(\taperangle))})
+		-- ++ ({90+\taperangle}:{\adjtaperlength/cos(\taperangle)})
+		-- cycle;
+	\path (0,0)                  coordinate (-center);
+		}%%%
+	},%%
+}%
+\def\pennyanga{100}
+\def\pennyrad{0.3958*\adjtaperwidth} %What is the mathematical significance of this? 
+\tikzset{%
+	pics/penny_stopper/.style={%%
+		code={%%%
+	\draw (0, 0)
+		   ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength)
+		-- ++ ({270-\taperangle}:{\adjtaperlength/cos(\taperangle)})
+		-- ++ (180:{\adjtaperwidth-(2*\adjtaperwidth*tan(\taperangle))})
+		-- ++ ({90+\taperangle}:{\adjtaperlength/cos(\taperangle)})
+		-- cycle;
+	\draw (0, 0)
+		   ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength)
+		arc (250:250-\pennyanga:\pennyrad)
+		arc (-30:{-30+3*(180-\pennyanga)}:\pennyrad)
+		arc (30:30-\pennyanga:\pennyrad);
+		
+	\path (0,0)                  coordinate (-center);
+		}%%%
+	},%%
+}%
+\tikzset{%
+	pics/rbf/.style={%%
+		code={%%%
+	\foreach \i in {#1}	
+		\draw (\i:{\R+0.5*\adjtaperlength}) pic[rotate={\i-90}] (t\i) {_tapered_open};
+	\draw (0, 0) circle (\R);
+	%\draw (0,0) -- (t90-ne);
+	\path (0,0)										coordinate (-center);
+	\foreach \i in {#1}
+		\path (\i:{\R+0.5*\adjtaperlength})	coordinate (-taper\i-center);
+		}%%%
+	}%%
+}%
