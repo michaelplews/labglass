@@ -1,0 +1,165 @@
+\def\aeunitcircleradius{1cm}
+\def\taperangle{4}
+\def\R{0.5}				%radius of flask
+\def\taperwidth{24}			%Width of the joint taper
+\def\taperlength{40}		%Length of the joint taper
+\usetikzlibrary{calc}
+\tikzset{
+  quadrant I/.pic={%%
+    \draw[line width=1pt] (-\aeunitcircleradius/2,\aeunitcircleradius/2)  arc (90:0:\aeunitcircleradius);
+    \path (0,0)                  coordinate (-center)
+                -- ++ (0.5,-0.5) coordinate (-se)
+                -- ++ (0,1.0)    coordinate (-ne)
+                -- ++ (-1,0)     coordinate (-nw)
+                -- ++ (0,-1)     coordinate (-sw);
+    },
+  quadrant II/.pic={%%
+    \draw[line width=1pt] (-\aeunitcircleradius/2,-\aeunitcircleradius/2)  arc (180:90:\aeunitcircleradius);
+    \path (0,0)                  coordinate (-center)
+                -- ++ (0.5,-0.5) coordinate (-se)
+                -- ++ (0,1.0)    coordinate (-ne)
+                -- ++ (-1,0)     coordinate (-nw)
+                -- ++ (0,-1)     coordinate (-sw);
+    },
+  quadrant III/.pic={%%
+    \draw[line width=1pt] (-\aeunitcircleradius/2,\aeunitcircleradius/2)  arc (180:270:\aeunitcircleradius);
+    \path (0,0)                  coordinate (-center)
+                -- ++ (0.5,-0.5) coordinate (-se)
+                -- ++ (0,1.0)    coordinate (-ne)
+                -- ++ (-1,0)     coordinate (-nw)
+                -- ++ (0,-1)     coordinate (-sw);
+    },
+  quadrant IV/.pic={%%
+    \draw[line width=1pt] (-\aeunitcircleradius/2,-\aeunitcircleradius/2)  arc (-90:0:\aeunitcircleradius);
+    \path (0,0)                  coordinate (-center)
+                -- ++ (0.5,-0.5) coordinate (-se)
+                -- ++ (0,1.0)    coordinate (-ne)
+                -- ++ (-1,0)     coordinate (-nw)
+                -- ++ (0,-1)     coordinate (-sw);
+    },
+}
+\def\adjtaperlength{\taperlength/100}
+\def\adjtaperwidth{\taperwidth/100}
+\tikzset{%
+	pics/_tapered_open/.style={%%
+		code={%%%
+	\draw (0,0)
+		   ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength)
+		-- ++ ({270-\taperangle}:{\adjtaperlength/cos(\taperangle)})
+	       ++ (180:{\adjtaperwidth-(2*\adjtaperlength*tan(\taperangle))})
+		-- ++ ({90+\taperangle}:{\adjtaperlength/cos(\taperangle)});
+	\path (0,0)																coordinate (-center)
+		-- ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength) 					coordinate (-ne)
+		-- ++ ({270-\taperangle}:{\adjtaperlength/cos(\taperangle)})		coordinate (-se)
+		-- ++ (180:{\adjtaperwidth-(2*\adjtaperlength*tan(\taperangle))}) 	coordinate (-sw)
+		-- ++ ({90+\taperangle}:{\adjtaperlength/cos(\taperangle)}) 		coordinate (-nw);
+		}%%%
+	},%%
+}%
+\tikzset{%
+	pics/tapered_stopper/.style={%%
+		code={%%%
+	\draw (0, 0)
+		   ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength)
+		-- ++ ({270-\taperangle}:{\adjtaperlength/cos(\taperangle)})
+		-- ++ (180:{\adjtaperwidth-(2*\adjtaperlength*tan(\taperangle))})
+		-- ++ ({90+\taperangle}:{\adjtaperlength/cos(\taperangle)})
+		-- cycle;
+	\path (0,0)                  coordinate (-center);
+		}%%%
+	},%%
+}%
+\def\pennyanga{100}
+\def\pennyrad{0.36*\adjtaperwidth} %What is the mathematical significance of this? Fix?
+\tikzset{%
+	pics/penny_stopper/.style={%%
+		code={%%%
+	\draw (0, 0)
+		   ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength)
+		-- ++ ({270-\taperangle}:{\adjtaperlength/cos(\taperangle)})
+		-- ++ (180:{\adjtaperwidth-(2*\adjtaperlength*tan(\taperangle))})
+		-- ++ ({90+\taperangle}:{\adjtaperlength/cos(\taperangle)})
+		-- cycle;
+	\draw (0, 0)
+		   ++ (0.5*\adjtaperwidth, 0.5*\adjtaperlength)
+		arc (250:250-\pennyanga:\pennyrad)
+		arc (-30:{-30+3*(180-\pennyanga)}:\pennyrad)
+		arc (30:30-\pennyanga:\pennyrad);
+		
+	\path (0,0)                  coordinate (-center);
+		}%%%
+	},%%
+}%z
+\tikzset{%
+	pics/rbf/.style={%%
+		code={%%%
+	\foreach \i in {#1}			
+		\draw (\i:{\R+0.5*\adjtaperlength}) pic[rotate={\i-90}] (t\i) {_tapered_open};
+	\draw (0, 0) circle (\R);
+	%\draw (0,0) -- (t90-ne);
+	\path (0,0)										coordinate (-center);
+	\foreach \i in {#1}
+		\path (\i:{\R+0.5*\adjtaperlength})	coordinate (-taper\i-center);
+		%-- (t\i-se) coordinate (-taper\i-se); 
+		%Problems getting the arcs draw from paths by nesting tikzsets
+		}%%%
+	},%%
+}%
+%leibig_condenser uses parameters:
+%	\taperangle		Angle of taper incline
+%	\length			Length of the column, first argument (required)
+%	\direction		1 or -1, dictates which side the water inlets go (needs fixing)
+%	\waterwidth		Distance of outer tube from inner tube. Defaults to 0.3*\width
+%	\taperslant		Distance of taper at \taperangle. Used in polar coordinates
+\def\length{150}
+\def\direction{1}
+\def\waterwidth{0.25*\adjtaperwidth}
+\def\taperslant{\adjtaperlength/cos(\taperangle)}
+\tikzset{%
+	pics/leibig_condenser/.style={%%
+		code={%%%
+	\def\length{#1/100}
+	\draw (0, 0)
+		   ++ (0:{0.5*\adjtaperwidth})
+		   ++ (90:{0.5*\adjtaperlength})
+		   ++ ({270-\taperangle}:{\taperslant})
+		-- ++ ({270-\taperangle+180}:{\taperslant})
+		-- ++ ({-tan(\taperangle)*\adjtaperlength},0)
+		   ++ (90:\length)
+		-- ++ ({270-\taperangle+180}:{\taperslant});
+	\draw (0, 0)
+		   ++ (180:{0.5*\adjtaperwidth})
+		   ++ (90:{0.5*\adjtaperlength})
+		   ++ ({270+\taperangle}:{\taperslant})
+		-- ++ ({270+\taperangle+180}:{\taperslant})
+		-- ++ ({tan(\taperangle)*\adjtaperlength},0)
+		   ++ (90:\length)
+		-- ++ ({270+\taperangle+180}:{\taperslant});
+	\draw (0, 0) %Inlet side
+		   ++ (0:{\direction*(0.5*\adjtaperwidth-tan(\taperangle)*\adjtaperlength)})
+		   ++ (90:{0.5*\adjtaperlength})
+		arc (-90:{-90+(90*\direction)}:{\waterwidth})
+		-- ++ (0:{\direction*\waterwidth})
+		   ++ (90:{0.5*\waterwidth})
+		-- ++ (180:{\direction*\waterwidth})
+		-- ++ (90:{\length-3*\waterwidth})
+		-- ++ (0:{\direction*\waterwidth})
+		   ++ (90:{0.5*\waterwidth})
+		-- ++ (180:{\direction*\waterwidth})
+		arc ({90-(\direction*90)}:90:{\waterwidth})
+		-- ++ (270:{\length})
+		arc (-90:{-90+(90*\direction)}:{\waterwidth});
+	\draw (0, 0) %Non-Inlet side
+		   ++ (180:{\direction*(0.5*\adjtaperwidth-tan(\taperangle)*\adjtaperlength)})
+		   ++ (90:{0.5*\adjtaperlength})
+		arc (270:{270-(90*\direction)}:{\waterwidth})
+		-- ++ (90:{\length-2*\waterwidth})
+		arc ({90+(\direction*90)}:90:{\waterwidth})
+		-- ++ (270:{\length-2*\waterwidth})
+		-- cycle;
+	\path (0, 0)									coordinate (-taperM-center)
+		-- ++ (90:{0.5*(\length+\adjtaperlength)})	coordinate (-center)
+		-- ++ (90:{0.5*(\length+\adjtaperlength)})	coordinate (-taperF-center);
+		}%%%
+	},%%
+}%

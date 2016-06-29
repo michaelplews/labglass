@@ -14,7 +14,7 @@ rbf.pdf: rbf.tex
 
 step_down.pdf: step_down.tex
 
-testing.pdf: testing.tex tikzlibraryunitcircle.code.tex
+testing.pdf: testing.tex tikzlibrarylabglass.code.tex
 	${TEX} testing.tex
 
 clean:
