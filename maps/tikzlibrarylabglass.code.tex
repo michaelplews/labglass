@@ -1,6 +1,7 @@
 \def\aeunitcircleradius{1cm}
 \def\taperangle{4}
-\def\R{0.5}				%radius of flask
+\def\glassscale{0.1}
+\def\R{5}					%radius of flask
 \def\taperwidth{24}			%Width of the joint taper
 \def\taperlength{40}		%Length of the joint taper
 \usetikzlibrary{calc}
@@ -38,8 +39,8 @@
                 -- ++ (0,-1)     coordinate (-sw);
     },
 }
-\def\adjtaperlength{\taperlength/100}
-\def\adjtaperwidth{\taperwidth/100}
+\def\adjtaperlength{\taperlength*\glassscale}
+\def\adjtaperwidth{\taperwidth*\glassscale}
 \tikzset{%
 	pics/_tapered_open/.style={%%
 		code={%%%
@@ -118,7 +119,7 @@
 \tikzset{%
 	pics/leibig_condenser/.style={%%
 		code={%%%
-	\def\length{#1/100}
+	\def\length{#1*\glassscale}
 	\draw (0, 0)
 		   ++ (0:{0.5*\adjtaperwidth})
 		   ++ (90:{0.5*\adjtaperlength})
@@ -160,6 +161,13 @@
 	\path (0, 0)									coordinate (-taperM-center)
 		-- ++ (90:{0.5*(\length+\adjtaperlength)})	coordinate (-center)
 		-- ++ (90:{0.5*(\length+\adjtaperlength)})	coordinate (-taperF-center);
+	\path (0, 0)
+		-- ++ (0:{\direction*(0.5*\adjtaperwidth-tan(\taperangle)*\adjtaperlength)})
+		-- ++ (90:{0.5*\adjtaperlength})
+		arc (-90:{-90+(90*\direction)}:{\waterwidth})
+		-- ++ (0:{\direction*\waterwidth})
+		-- ++ (90:{0.25*\waterwidth})				coordinate (-inletIN)
+		-- ++ (90:{\length-2.5*\waterwidth})		coordinate (-inletOUT);
 		}%%%
 	},%%
 }%

@@ -1,0 +1,47 @@
+\documentclass[border = 10pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{labglass}
+\usetikzlibrary{positioning}
+\begin{document}
+
+\begin{tikzpicture}
+
+%  \path
+%              (0,0) pic (LL) {quadrant III}
+%        -- ++ (1,0) pic (LR) {quadrant IV}
+%        -- ++ (0,1) pic (UR) {quadrant I}
+%        -- cycle
+%        -- ++ (0,1) pic (UL) {quadrant II}
+%      ;
+%  \draw[blue] (LR-ne) -- (LR-sw);
+%
+% \draw[red] (LL-ne) rectangle (LL-sw);
+%
+%  \draw (LL-center) -- (UR-center)
+%                    -- (UL-center)
+%                    -- (LR-center);
+
+	\def\taperwidth{14}
+	\def\taperlength{20}
+	%\pic (A) {rbf={90, 45}};	
+	\pic[line width=1.5pt] at (0,0) (B) {leibig_condenser={150}};
+		\coordinate (z) at (B-taperM-center) {};
+			\draw[blue, fill=blue] (z) circle (0.1);
+			\node[blue, right=1.75cm of z] (z2) {\textbf{\Large-taperM-center}};			
+		\coordinate (y) at (B-center) {};
+			\draw[red, fill=red] (y) circle (0.1);
+			\node[red, right=1.75cm of y] (y2) {\textbf{\Large-center}};		
+		\coordinate (x) at (B-taperF-center) {};
+			\draw[green, fill=green] (x) circle (0.1);
+			\node[green, right=1.75cm of x] (x2) {\textbf{\Large-taperF-center}};
+		\coordinate (w) at (B-inletIN) {};
+			\draw[purple, fill=purple] (w) circle (0.1);
+			\node[purple, right=0.5cm of w] (w2) {\textbf{\Large-inletIN}};
+		\coordinate (v) at (B-inletOUT) {};
+			\draw[orange, fill=orange] (v) circle (0.1);
+			\node[orange, right=0.5cm of v] (v2) {\textbf{\Large-inletOUT}};
+
+\end{tikzpicture}
+
+\end{document}
