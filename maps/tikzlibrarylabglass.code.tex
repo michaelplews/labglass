@@ -171,3 +171,30 @@
 		}%%%
 	},%%
 }%
+\tikzset{%
+	pics/pipe_male/.style 2 args={%%
+		code={%%%
+	\def\length{#1*\glassscale}
+	\def\width{#2*\glassscale}
+	\draw (0, 0)
+		   ++ (0:{0.5*\adjtaperwidth})
+		   ++ (90:{0.5*\adjtaperlength})
+		   ++ ({270-\taperangle}:{\taperslant})
+		-- ++ ({270-\taperangle+180}:{\taperslant})
+		arc (0:45:{\adjtaperwidth-\width})
+		arc (45+180:0+180:{\adjtaperwidth-\width})
+		-- ++ (90:{\length});
+	\draw (0, 0)
+		   ++ (180:{0.5*\adjtaperwidth})
+		   ++ (90:{0.5*\adjtaperlength})
+		   ++ ({270+\taperangle}:{\taperslant})
+		-- ++ ({270+\taperangle+180}:{\taperslant})
+		arc (180:135:{\adjtaperwidth-\width})
+		arc (135+180:180+180:{\adjtaperwidth-\width})		
+		-- ++ (90:{\length});
+	\path (0, 0)									coordinate (-taperM-center)
+		-- ++ (90:{0.5*(\length+\adjtaperlength)})		coordinate (-center)
+		-- ++ (90:{0.5*\length})					coordinate (-end);
+		}%%%
+	},%%
+}%
