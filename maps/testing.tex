@@ -24,8 +24,14 @@
 
 	\def\taperwidth{14}
 	\def\taperlength{20}
-	%\pic (A) {leibig_condenser={150}};	
-	\pic[line width=1.5pt] at (0,0) (B) {pipe_male={50}{12}};
+	\pic (C) {rbf={90, 45}};
+	\pic at (C-taper90-center) (A) {leibig_condenser={150}};
+	\fill[fill=green!20, opacity=0.5]
+		(C-center)
+		++ (180:\R)
+		arc (180:360:\R)
+		-- ++ (180: {2*\R});
+	\pic at (A-taperF-center) (B) {pipe_male={50}{12}};
 		\coordinate (z) at (B-taperM-center) {};
 			\draw[red, fill=red] (z) circle (0.1);
 			\node[red, right=1.75cm of z] (z2) {\textbf{\Large-taperM-center}};	
@@ -34,7 +40,8 @@
 			\node[blue, right=1.75cm of y] (y2) {\textbf{\Large-center}};	
 		\coordinate (x) at (B-end) {};
 			\draw[green, fill=green] (x) circle (0.1);
-			\node[green, right=1.75cm of x] (x2) {\textbf{\Large-end}};	
+			\node[green, right=1.75cm of x] (x2) {\textbf{\Large-end}};
+	\pic[line width=1.5pt] at (B-end) (C) {elbow={335}{12}};	
 
 \end{tikzpicture}
 

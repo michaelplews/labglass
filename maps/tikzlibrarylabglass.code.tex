@@ -198,3 +198,25 @@
 		}%%%
 	},%%
 }%
+\tikzset{%
+	pics/elbow/.style 2 args={%%
+		code={%%%
+	\ifnum#1>270
+		\def\angle{#1-360}
+	\else
+		\def\angle{#1}
+	\fi
+	\def\width{#2*\glassscale}
+	\draw (0, 0)
+		   ++ (0: {0.5*\width})
+		-- ++ (90: 1)
+		-- ++ (\angle:10*\glassscale);
+	\draw (0, 0)
+		   ++ (180: {0.5*\width})
+		-- ++ (90: 1)
+		arc (180:{\angle+90}:\width)
+		-- ++ (\angle:{10*\glassscale});
+	\path (0, 0)									coordinate (-start);
+		}%%%
+	},%%
+}%
